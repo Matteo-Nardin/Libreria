@@ -27,20 +27,23 @@
     }
 
     function deleteBook($mysqli, $id) {
-        if(!$mysqli->query('DELETE FROM users WHERE id = ' . $id)) { echo($mysqli->connect_error); }
+        if(!$mysqli->query('DELETE FROM libri WHERE id = ' . $id)) { echo($mysqli->connect_error); }
         else { echo 'Record eliminato con successo';}
     }
 
     function modifyBook($mysqli, $id, $titolo, $autore, $anno_pubblicazione, $genere) {
-        $sql = "UPDATE users SET 
-                            titolo = '" . $titolo . "', 
-                            autore = '" . $autore. "', 
-                            anno_pubblicazione = '" . $anno_pubblicazione. "', 
-                            genere = '" . $genere. "', 
-                            WHERE id = " . $id;
+        $sql = "UPDATE libri SET titolo = '" . $titolo . "' , autore = '" . $autore. "', anno_pubblicazione = '" . $anno_pubblicazione. "', genere = '" . $genere. "' WHERE id = " . $id;
             if(!$mysqli->query($sql)) { echo($mysqli->connect_error); }
             else { echo 'Record aggiornato con successo!!!';}
     }
-    
+
+    function singleBook($mysqli) {     
+        $sql = "SELECT * FROM libri WHERE id = " . $_GET['id']; 
+        $res = $mysqli->query($sql);
+        if($res) { 
+            $result = $res->fetch_assoc();
+        }
+        return $result;
+    }
 
 ?>
