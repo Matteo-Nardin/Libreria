@@ -2,13 +2,10 @@
     require_once 'config.php';
     include_once('functions.php');
     
-
-    $result = getBooks($mysqli);
-
-    // echo $_SERVER['HTTP_REFERER'];
-    // $str = $_SERVER['HTTP_REFERER'];
-    // $pattern = "/index/i";
-    // echo preg_match($pattern, $str);
+    [$result,$all_pages, $all_record] = getBooks($mysqli);
+    //print_r ($all_pages);
+    //print_r($result);
+    //$_SERVER['DOCUMENT_ROOT']
   
 ?>
 
@@ -24,6 +21,7 @@
 <body>
     <?php include_once('navBar.php'); ?>
     <div class="container">
+    <p>Risultati: <?= $all_record ?> in <?= $all_pages ?> pagine</p>
         <div class="my-3">
             <table class="table table-dark table-striped table-hover">
                 <thead>
@@ -58,6 +56,49 @@
                 </tbody>
             </table>
         </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <?php
+                if(isset($_GET["n_page"]) && $_GET["n_page"] > 1) { ?>
+                    <li class="page-item"><a class="page-link" href="?n_page=1">Inizio</a></li>
+                <?php }else{ ?>
+                    <li class="page-item disabled"><a class="page-link" href="">Inizio</a></li>
+                <?php } ?>
+
+                <?php
+                if(isset($_GET["n_page"]) && $_GET["n_page"] > 1) { ?>
+                    <li class="page-item"><a class="page-link" href="?n_page=<?= $_GET["n_page"]-1 ?>">Precedente</a></li>
+                <?php }else{ ?>
+                    <li class="page-item disabled"><a class="page-link" href="#">Precedente</a></li>
+                <?php } ?>
+
+                <?php for($i=1; $i<=$all_pages; $i++) { ?>
+                    <!-- ogni volta che clicco con href aggiorno la pagina stessa e richiamo getBooks() -->
+                    <li class="page-item"><a class="page-link<?= preg_match("/n_page=$i/i", uri() ) ? " active" : "" ?>" href="?n_page=<?= $i ?>"><?= $i ?></a></li>
+                <?php } ?>
+
+                <?php
+                if(!isset($_GET["n_page"])) { ?>
+                    <li class="page-item"><a class="page-link" href="?n_page=2">Successivo</a></li>
+                <?php }else if($_GET["n_page"] >= $all_pages){ ?>
+                    <li class="page-item disabled"><a class="page-link" href="#">Sucessivo</a></li>
+                <?php }else{ ?>
+                    <li class="page-item"><a class="page-link" href="?n_page=<?= $_GET["n_page"]+1 ?>">Sucessivo</a></li>
+                <?php } ?>
+
+                <?php
+                if(!isset($_GET["n_page"])) { ?>
+                    <li class="page-item"><a class="page-link" href="?n_page=<?= $_GET["n_page"]=$all_pages ?>">Fine</a></li>
+                <?php }else if($_GET["n_page"] >= $all_pages){ ?>
+                    <li class="page-item disabled"><a class="page-link" href="#">Fine</a></li>
+                <?php }else{ ?>
+                    <li class="page-item"><a class="page-link" href="?n_page=<?= $_GET["n_page"]=$all_pages ?>">Fine</a></li>
+                <?php } ?>
+                
+            </ul>
+        </nav>
+
     </div>
 
     

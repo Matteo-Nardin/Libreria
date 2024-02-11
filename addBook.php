@@ -1,11 +1,7 @@
 <?php
     require_once 'config.php';
-
-    //echo $_SERVER['HTTP_REFERER'];
-    // echo $_SERVER['SCRIPT_URI'];
-    // $str = $_SERVER['HTTP_REFERER'];
-    // $pattern = "/index/i";
-    // echo preg_match($pattern, $str);
+    include_once('functions.php');
+    //phpinfo();
     
 ?>
 <!DOCTYPE html>

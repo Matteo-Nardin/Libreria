@@ -1,3 +1,7 @@
+<?php
+  include_once('functions.php');
+?>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -7,10 +11,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Catalogo</a>
+          <a class="nav-link<?= preg_match("/index/i", uri() ) ? " active" : "";?>" aria-current="page" href="index.php">Catalogo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="addBook.php">Aggiungi Libro</a>
+          <a class="nav-link<?= preg_match("/addBook/i", uri() ) ? " active" : "";?>" href="addBook.php">Aggiungi Libro</a>
         </li>
       </ul>
       <!-- <form class="d-flex" role="search">
