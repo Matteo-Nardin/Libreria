@@ -82,4 +82,33 @@
         return $uri;
     }
 
+    function register($mysqli, $user_name, $email, $password)
+        {
+            $sql = "INSERT INTO users (user_name, email, password) VALUES ('$user_name', '$email', '$password');";
+            if (!$mysqli->query($sql)) {
+                echo ($mysqli->connect_error);
+            } else {
+                echo 'Registrazione avvenuta con successo!!!';
+            }
+        }
+
+    function login($mysqli, $email, $hash_password) {
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $res = $mysqli->query($sql);
+        //var_dump($res);
+        if($res) { // Controllo se ci sono dei dati nella variabile $res 
+            $result = $res->fetch_assoc(); // estraggo ogni singola riga che leggo dal DB e la inserisco in un array  
+        }
+        //var_dump($result['password']);
+        if(password_verify($hash_password, $result['password'])){
+            echo 'Login effettuato!!';
+            //salvo il risultato preso dal db nella sessione per poterlo riutilizzare nella navbar
+            $_SESSION['userLogin'] = $result;
+            session_write_close();
+            exit(header('Location: http://localhost/IFOA/libreria/index.php'));
+        } else {
+            echo 'Password errata!!';
+        }
+    }
+
 ?>

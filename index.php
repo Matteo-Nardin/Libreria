@@ -6,7 +6,6 @@
     //print_r ($all_pages);
     //print_r($result);
     //$_SERVER['DOCUMENT_ROOT']
-  
 ?>
 
 <!DOCTYPE html>

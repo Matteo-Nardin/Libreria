@@ -1,9 +1,3 @@
-<?php
-    require_once 'config.php';
-    include_once('functions.php');
-    //phpinfo();
-    
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,26 +11,25 @@
     <?php include_once('navBar.php'); ?>
     <div class="container">
 
-        <form method="post" action="gestione.php?action=addBook" enctype="multipart/form-data" class="my-3">
+        <form method="post" action="gestione.php?action=register" enctype="multipart/form-data" class="my-3">
             <div class="row g-3">
                 <div class="col-sm">
-                    <input type="text" class="form-control" placeholder="titolo..." name="titolo">
+                    <input type="text" class="form-control" placeholder="user name..." name="user_name">
                 </div>
                 <div class="col-sm">
-                    <input type="text" class="form-control" placeholder="autore..." name="autore">
+                    <input type="email" class="form-control" placeholder="email..." name="email">
                 </div>
                 <div class="col-sm">
-                    <input type="number" class="form-control" placeholder="anno..." name="anno_pubblicazione">
+                    <input type="password" class="form-control" placeholder="password..." name="password">
                 </div>
                 <div class="col-sm">
-                    <input type="text" class="form-control" placeholder="genere..." name="genere">
-                </div>
-                <div class="col-sm">
-                    <button type="submit" class="btn btn-dark">Aggiungi Libro</button>
+                    <button type="submit" class="btn btn-dark">Register</button>
                 </div>
             </div>
         </form>
-
+        <div>
+            <p>Se gia un nostro utente? <a href="login.php">Login</a></p>
+        </div>
     </div>
 
     

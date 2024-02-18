@@ -58,4 +58,15 @@
     // if(!$mysqli->query($sql)){
     //     die( $mysqli->connect_error);
     // };
+
+    $sql = 'CREATE TABLE IF NOT EXISTS users(
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        user_name VARCHAR(50) NOT NULL,
+        email VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL
+    )';
+
+    if(!$mysqli->query($sql)){
+        die( $mysqli->connect_error);
+    };
 ?>
